@@ -43,8 +43,8 @@ def train_recognizer(imagesfolder, labelsfile, haar_cascade):
     recognizer.save('face_trained.yml')
     print("Training completed and model saved as 'face_trained.yml'.")
 
-def recognize_faces(face_recognizer, haar_cascade, classes_path):
-    face_recognizer.read('face_trained.yml')
+def recognize_faces(face_recognizer, haar_cascade, classes_path, modelfile):
+    face_recognizer.read(modelfile)
     classes = load_classes_from_file(classes_path)
     print("Classes:", classes)
 
@@ -83,10 +83,11 @@ if int(choice) == 1:
     imagesfolder = input("Images folder path: ")
     labelsfile = input("Labels file path: ")
     train_recognizer(imagesfolder, labelsfile, haar_cascade)
-
+    
 elif int(choice) == 2:
+    modelfile=input("Model file path: ")
     classes_path = input("Classes file path: ")
-    recognize_faces(recognizer, haar_cascade, classes_path)
+    recognize_faces(recognizer, haar_cascade, classes_path, modelfile)
     
 else:
     print("Wrong Choice")
